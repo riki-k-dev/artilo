@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import ArtistDetails from "./components/ArtistDetails";
 import Scene from "./components/Scene";
 import creativeImages from "./content/CreativeImages";
+import CustomLoader from "./components/CustomLoader";
 
 function App() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <>
+      <CustomLoader />
       <div className="h-screen w-screen relative bg-gray-100 max-[520px]:hidden">
         <Canvas>
           <Suspense fallback={null}>

@@ -20,11 +20,25 @@ body {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(20%);
   }
+
   100% {
     transform: translateY(0%);
+  }
+}
+
+@keyframes pulseBrightness {
+
+  0%,
+  100% {
+    filter: brightness(6);
+  }
+
+  50% {
+    filter: brightness(11);
   }
 }
 
