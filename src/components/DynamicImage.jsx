@@ -49,8 +49,10 @@ const DynamicImage = ({
     if (camera) {
       const cam = camera.current;
       if (!cam) return;
+
       const cameraX = cam.position.x;
       const cameraY = cam.position.y;
+
       delta.x += (-1 * (imageObject.position[0] - cameraX) - delta.x) * 0.1;
       delta.y += (-1 * (imageObject.position[1] - cameraY) - delta.y) * 0.1;
       uniforms.current.uDelta.value = { x: delta.x, y: delta.y };
@@ -61,23 +63,28 @@ const DynamicImage = ({
     }
   });
 
+  const isClickable =
+    !selectedImage || selectedImage.index === imageIndex;
+
   return (
     <mesh
       ref={mesh}
       position={imageObject.position ?? [0, 0, 0]}
       scale={imageObject.scale ?? 1}
+
       onPointerDown={(e) => {
+        if (!isClickable) return;
         e.stopPropagation();
+
         setIsCameraLocked(true);
         setSelectedImage({
           index: imageIndex,
           position: imageObject.position,
         });
       }}
+
       onPointerEnter={() => {
-        if (!selectedImage || selectedImage.index === imageIndex) {
-          document.body.style.cursor = "pointer";
-        }
+        if (isClickable) document.body.style.cursor = "pointer";
       }}
       onPointerOut={() => (document.body.style.cursor = "auto")}
     >

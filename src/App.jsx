@@ -6,9 +6,22 @@ import Scene from "./components/Scene";
 import creativeImages from "./content/CreativeImages";
 import CustomLoader from "./components/CustomLoader";
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 520);
+
+  useEffect(() => {
+    const handler = () => setIsDesktop(window.innerWidth > 520);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  return isDesktop;
+}
+
 function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageObject, setSelectedImageObject] = useState(null);
+  const isDesktop = useIsDesktop(); // SCREEN SIZE CHECK
 
   useEffect(() => {
     if (selectedImage && selectedImage.index !== -1) {
@@ -32,7 +45,8 @@ function App() {
 
   return (
     <>
-      <CustomLoader />
+      {isDesktop && <CustomLoader />}
+
       <div className="h-screen w-screen relative bg-gray-100 max-[520px]:hidden">
         <Canvas>
           <Suspense fallback={null}>

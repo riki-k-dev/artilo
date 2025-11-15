@@ -18,13 +18,15 @@ const CustomLoader = () => {
 
       gsap.to(".artilo-text", {
         scale: 0.5,
-        y: "-47vh",
+        top: "1vh",
+        left: "5vw",
+        xPercent: 0,
+        yPercent: 0,
         duration: 1.4,
         ease: "power3.inOut",
-        onComplete: () => {
-          setHasMoved(true);
-        },
+        onComplete: () => setHasMoved(true),
       });
+
 
       gsap.to(".loader-bg", {
         opacity: 0,
@@ -42,10 +44,8 @@ const CustomLoader = () => {
 
   return (
     <>
-      {/* Background Overlay */}
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-100 z-[9998] loader-bg" />
 
-      {/* Artilo Text */}
       <h1
         className="artilo-text text-6xl font-bold text-neutral-900 fixed"
         style={{
